@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PulseDE Translator Test V2</title>
+<title>PulseDE Translator Test V5</title>
 
 <style>
-
 body{
     margin:0;
     font-family:Arial,sans-serif;
@@ -37,6 +36,16 @@ body{
     font-weight:bold;
 }
 
+.lang-link{
+    cursor:pointer;
+    color:#ffd76a;
+    text-decoration:none;
+}
+
+.lang-link:hover{
+    text-decoration:underline;
+}
+
 .lang-btn{
     background:#d6a84f;
     color:black;
@@ -59,18 +68,15 @@ body{
 }
 
 @media(max-width:700px){
+    .topbar{
+        flex-direction:column;
+        text-align:center;
+    }
 
-.topbar{
-    flex-direction:column;
-    text-align:center;
+    #text{
+        font-size:20px;
+    }
 }
-
-#text{
-    font-size:20px;
-}
-
-}
-
 </style>
 </head>
 
@@ -85,48 +91,36 @@ body{
 </div>
 
 <div class="rightinfo" id="languageStatus">
-🌍 Deutsch ✓ | English
+🌍 <span class="lang-link" onclick="setGerman()">Deutsch ✓</span> |
+<span class="lang-link" onclick="setEnglish()">English</span>
 </div>
 
 </div>
 
 <div class="content">
 
-<h2>🧩 PulseDE Translator Test</h2>
+<h2>🧩 PulseDE Translator Test V5</h2>
 
-<button class="lang-btn" onclick="setGerman()">
-Deutsch
-</button>
-
-<button class="lang-btn" onclick="setEnglish()">
-English
-</button>
+<button class="lang-btn" onclick="setGerman()">Deutsch</button>
+<button class="lang-btn" onclick="setEnglish()">English</button>
 
 <div id="text">
-
 Willkommen bei PulseDE Erlebniswelt
-
 </div>
 
 </div>
 
 <script>
-
 function updateLanguageDisplay(lang){
 
-const status =
-document.getElementById("languageStatus");
+const status = document.getElementById("languageStatus");
 
 if(lang === "en"){
-
-status.innerHTML =
-"🌍 Deutsch | English ✓";
-
+    status.innerHTML =
+    '🌍 <span class="lang-link" onclick="setGerman()">Deutsch</span> | <span class="lang-link" onclick="setEnglish()">English ✓</span>';
 }else{
-
-status.innerHTML =
-"🌍 Deutsch ✓ | English";
-
+    status.innerHTML =
+    '🌍 <span class="lang-link" onclick="setGerman()">Deutsch ✓</span> | <span class="lang-link" onclick="setEnglish()">English</span>';
 }
 
 }
@@ -155,27 +149,22 @@ updateLanguageDisplay("en");
 
 window.onload = function(){
 
-const lang =
-localStorage.getItem("language");
+const lang = localStorage.getItem("language");
 
 if(lang === "en"){
+    document.getElementById("text").innerHTML =
+    "Welcome to PulseDE Experience World";
 
-document.getElementById("text").innerHTML =
-"Welcome to PulseDE Experience World";
-
-updateLanguageDisplay("en");
-
+    updateLanguageDisplay("en");
 }else{
+    document.getElementById("text").innerHTML =
+    "Willkommen bei PulseDE Erlebniswelt";
 
-document.getElementById("text").innerHTML =
-"Willkommen bei PulseDE Erlebniswelt";
-
-updateLanguageDisplay("de");
-
+    updateLanguageDisplay("de");
 }
 
 }
-
 </script>
+
 </body>
 </html>
