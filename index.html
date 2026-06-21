@@ -4,15 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PulseDE Translator Test</title>
+<title>PulseDE Translator Test V2</title>
 
 <style>
+
 body{
-    font-family:Arial, sans-serif;
-    text-align:center;
+    margin:0;
+    font-family:Arial,sans-serif;
     background:#111;
     color:white;
-    padding:40px;
+    text-align:center;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 15px;
+    background:#090909;
+    border-bottom:2px solid #d6a84f;
+    font-size:14px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.leftinfo{
+    color:#ddd;
+}
+
+.rightinfo{
+    color:#ffd76a;
+    font-weight:bold;
 }
 
 .lang-btn{
@@ -26,20 +48,59 @@ body{
     font-weight:bold;
 }
 
-#text{
-    margin-top:30px;
-    font-size:24px;
+.content{
+    padding:30px 20px;
 }
-</style>
 
+#text{
+    margin-top:25px;
+    font-size:24px;
+    line-height:1.5;
+}
+
+@media(max-width:700px){
+
+.topbar{
+    flex-direction:column;
+    text-align:center;
+}
+
+#text{
+    font-size:20px;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-<h2>🌍 PulseDE Translator Test</h2>
+<div class="topbar">
 
-<button class="lang-btn" onclick="setGerman()">Deutsch</button>
+<div class="leftinfo">
+💻 Strg + / - / 0
+&nbsp;&nbsp;&nbsp;
+📱 Finger spreizen / zusammenziehen
+</div>
 
-<button class="lang-btn" onclick="setEnglish()">English</button>
+<div class="rightinfo">
+🌍 Deutsch | English
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>🧩 PulseDE Translator Test</h2>
+
+<button class="lang-btn" onclick="setGerman()">
+Deutsch
+</button>
+
+<button class="lang-btn" onclick="setEnglish()">
+English
+</button>
 
 <div id="text">
 
@@ -47,16 +108,22 @@ Willkommen bei PulseDE Erlebniswelt
 
 </div>
 
+</div>
+
 <script>
 
 function setGerman(){
+
 document.getElementById("text").innerHTML =
 "Willkommen bei PulseDE Erlebniswelt";
+
 }
 
 function setEnglish(){
+
 document.getElementById("text").innerHTML =
 "Welcome to PulseDE Experience World";
+
 }
 
 </script>
