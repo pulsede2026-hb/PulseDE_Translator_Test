@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PulseDE Translator V7e</title>
+<title>PulseDE Translator V8 Test</title>
 
 <style>
 html,body{
@@ -16,7 +16,9 @@ html,body{
 
 .translator-box{
     width:100%;
+    box-sizing:border-box;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
     padding:6px 0;
@@ -33,6 +35,7 @@ html,body{
     text-decoration:none;
     color:#d4af37;
     margin:0 3px;
+    cursor:pointer;
 }
 
 .language-bar a:hover{
@@ -44,9 +47,27 @@ html,body{
     font-weight:bold;
 }
 
+.test-text{
+    margin-top:6px;
+    padding:0 8px;
+    text-align:center;
+    color:white;
+    font-size:14px;
+    line-height:1.35;
+}
+
+.test-title{
+    color:#d4af37;
+    font-weight:bold;
+}
+
 @media(max-width:600px){
     .language-bar{
         font-size:16px;
+    }
+
+    .test-text{
+        font-size:13px;
     }
 }
 </style>
@@ -56,42 +77,87 @@ html,body{
 
 <div class="translator-box">
 
-<div class="language-bar">
-
+<div class="language-bar" id="languageBar">
 🌍
 
-<a class="active"
-href="https://sites.google.com/view/pulsede-tonstudio/harry-bolero-pulsde-erlebniswelt">
-DE ✓
-</a>
-
+<a href="#" data-lang="de" onclick="setLanguage('de'); return false;">DE</a>
 |
-
-<a href="#">
-EN
-</a>
-
+<a href="#" data-lang="en" onclick="setLanguage('en'); return false;">EN</a>
 |
-
-<a href="https://sites.google.com/view/pulsede-tonstudio/pulsede-home-nl">
-NL
-</a>
-
+<a href="#" data-lang="nl" onclick="setLanguage('nl'); return false;">NL</a>
 |
-
-<a href="#">
-FR
-</a>
-
+<a href="#" data-lang="fr" onclick="setLanguage('fr'); return false;">FR</a>
 |
+<a href="#" data-lang="es" onclick="setLanguage('es'); return false;">ES</a>
+</div>
 
-<a href="#">
-ES
-</a>
-
+<div class="test-text">
+<div class="test-title" id="headline">PulseDE Translator V8 Test</div>
+<div id="mainText">Willkommen bei PulseDE Erlebniswelt</div>
 </div>
 
 </div>
+
+<script>
+const translations = {
+    de: {
+        headline: "PulseDE Translator V8 Test",
+        mainText: "Willkommen bei PulseDE Erlebniswelt"
+    },
+    en: {
+        headline: "PulseDE Translator V8 Test",
+        mainText: "Welcome to PulseDE Experience World"
+    },
+    nl: {
+        headline: "PulseDE Translator V8 Test",
+        mainText: "Welkom bij PulseDE Belevingswereld"
+    },
+    fr: {
+        headline: "PulseDE Translator V8 Test",
+        mainText: "Bienvenue dans l'univers PulseDE"
+    },
+    es: {
+        headline: "PulseDE Translator V8 Test",
+        mainText: "Bienvenido al mundo de PulseDE"
+    }
+};
+
+function setLanguage(lang){
+    if(!translations[lang]){
+        lang = "de";
+    }
+
+    localStorage.setItem("pulsede_language", lang);
+
+    document.documentElement.lang = lang;
+    document.getElementById("headline").innerText = translations[lang].headline;
+    document.getElementById("mainText").innerText = translations[lang].mainText;
+
+    updateLanguageBar(lang);
+}
+
+function updateLanguageBar(activeLang){
+    const links = document.querySelectorAll(".language-bar a");
+
+    links.forEach(function(link){
+        const lang = link.getAttribute("data-lang");
+        const label = lang.toUpperCase();
+
+        if(lang === activeLang){
+            link.classList.add("active");
+            link.innerText = label + " ✓";
+        }else{
+            link.classList.remove("active");
+            link.innerText = label;
+        }
+    });
+}
+
+window.addEventListener("DOMContentLoaded", function(){
+    const savedLanguage = localStorage.getItem("pulsede_language") || "de";
+    setLanguage(savedLanguage);
+});
+</script>
 
 </body>
 </html>
